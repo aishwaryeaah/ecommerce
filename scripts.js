@@ -7,9 +7,9 @@ document.querySelectorAll('nav a').forEach(anchor => {
     });
 });
 
-function togglePassword() {
-    const passwordField = document.getElementById("password");
-    const toggleBtn = document.querySelector("#password ~ .toggle-password");
+function toggleLoginPassword() {
+    const passwordField = document.getElementById("login-password");
+    const toggleBtn = document.querySelector(".toggle-login-password");
     if (passwordField.type === "password") {
         passwordField.type = "text";
         toggleBtn.classList.remove("fa-eye");
@@ -23,7 +23,7 @@ function togglePassword() {
 
 function toggleSignupPassword() {
     const passwordField = document.getElementById("signup-password");
-    const toggleBtn = document.querySelector("#signup-container #signup-password ~ .toggle-password");
+    const toggleBtn = document.querySelector(".toggle-password");
     if (passwordField.type === "password") {
         passwordField.type = "text";
         toggleBtn.classList.remove("fa-eye");
@@ -37,7 +37,7 @@ function toggleSignupPassword() {
 
 function toggleConfirmPassword() {
     const confirmPasswordField = document.getElementById("confirm-password");
-    const toggleBtn = document.querySelector("#signup-container #confirm-password ~ .toggle-password");
+    const toggleBtn = document.querySelector(".toggle-confirm-password");
     if (confirmPasswordField.type === "password") {
         confirmPasswordField.type = "text";
         toggleBtn.classList.remove("fa-eye");
@@ -48,6 +48,7 @@ function toggleConfirmPassword() {
         toggleBtn.classList.add("fa-eye");
     }
 }
+
 
 function toggleSignup() {
     document.querySelector('.form-container').style.display = 'none';
@@ -68,4 +69,9 @@ function validateSignupForm() {
         return false;
     }
     return true;
+}
+
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
 }

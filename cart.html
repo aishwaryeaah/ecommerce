@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart</title>
+    <link rel="stylesheet" href="dash-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        body, h1, h2, h3, a {
+            color: #000000;
+        }
+        body {
+            background-color: #f8f9fa;
+        }
+        /* Remove underline from all links */
+        a {
+            text-decoration: none;
+        }
+        /* Button and link styles */
+        .order-now-btn, .dropdown-content a, .footer-about a {
+            text-decoration: none;
+        }
+        /* Header and navigation styling */
+        header {
+            background: transparent;
+            color: #000000;
+            padding: 10px 0;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700; /* Use Campton Black */
+            color: #FECA09; /* Change color to match nav text */
+            text-shadow: 
+                2px 2px 0 #000; /* Solid shadow effect in the bottom-right corner */
+        }
+        .logo a {
+            text-decoration: none !important;
+            border: none !important; /* Check if border is causing visual issues */
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        .nav-links a {
+            color: #000000;
+            text-decoration: none; /* Remove underline */
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 20px;
+            position: relative;
+            font-weight: 700;
+        }
+        .nav-links a:last-child {
+            margin-right: 0;
+        }
+        .nav-links a:hover {
+            background: #333;
+        }
+        .dropdown {
+            position: relative;
+            font-size: smaller;
+        }
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+        .dropdown-content, .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #000000;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            font-size: smaller;
+        }
+        .dropdown-content a, .dropdown-menu a {
+            color: #FECA09;
+            padding: 12px 16px;
+            text-decoration: none; /* Remove underline */
+            display: block;
+            font-size: small; /* Adjust font size here */
+            font-weight: 200;
+        }
+        .dropdown-content a:hover, .dropdown-menu a:hover {
+            background-color: #333;
+        }
+        .dropdown:hover .dropdown-content, .profile-icon:hover .dropdown-menu {
+            display: block;
+        }
+        /* Dropdown menu for profile icon */
+        .profile-icon .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #000000;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            font-size: 14px; /* Font size for profile dropdown items */
+            right: 0; /* Align the dropdown to the right */
+            top: 100%; /* Position the dropdown below the profile icon */
+            min-width: 200px; /* Set the width to match the category dropdown */
+            border-radius: 8px; /* Rounded corners */
+        }
+        .profile-icon:hover .dropdown-menu {
+            display: block;
+        }
+        .profile-icon .dropdown-menu a {
+            color: #FECA09;
+            padding: 12px 16px;
+            text-decoration: none; /* Remove underline */
+            display: block;
+        }
+        .profile-icon .dropdown-menu a:hover {
+            background-color: #333;
+        }
+        /* Dropdown menu for category */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #000000;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            font-size: 14px; /* Font size for category dropdown items */
+            min-width: 200px; /* Set the width to match the profile dropdown */
+            border-radius: 8px; /* Rounded corners */
+        }
+        .dropdown-content a {
+            color: #FECA09;
+            padding: 12px 16px;
+            text-decoration: none; /* Remove underline */
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #333;
+        }
+        /* Ensure dropdowns display on hover */
+        .dropdown:hover .dropdown-content, .profile-icon:hover .dropdown-menu {
+            display: block;
+        }
+        .profile-icon {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .profile-icon i {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .cart-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            width: 100%;
+        }
+        
+        .cart-item h4 {
+            margin: 0;
+        }
+        .cart-item p {
+            margin: 5px 0;
+        }
+        .cart-item .remove-btn {
+            margin-left: auto;
+            padding: 5px 10px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .cart-item .remove-btn:hover {
+            background-color: #cc0000;
+        }
+        .empty-cart {
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+        }
+        .tracker {
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-weight: 200;
+            font-size: small;
+        }
+        footer {
+            margin-top: auto;
+            width: 100%;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Campton', sans-serif;
+        }
+        .footer-upper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px 50px;
+            border-bottom: 1px solid #444;
+            text-align: left;
+        }
+        .footer-address {
+            flex: 1;
+            text-align: left;
+        }
+        .footer-address p {
+            margin: 5px 0;
+            font-size: smaller;
+        }
+        .footer-about {
+            flex: 1;
+            text-align: left;
+        }
+        .footer-about a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            font-size: smaller;
+            margin: 5px 0;
+        }
+        .footer-about a:hover {
+            text-decoration: underline;
+        }
+        .footer-social {
+            flex: 1;
+            text-align: right;
+        }
+        .footer-social .social-icon {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 20px;
+        }
+        .footer-social .social-icon:hover {
+            color: #6b7e09;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+        }
+        .checkout-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .checkout-container h2 {
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .checkout-btn {
+            background-color: #6b7e09;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .checkout-btn:hover {
+            background-color: #5a6a07;
+        }
+        #checkout-message {
+            margin-top: 15px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="dashboard.html"><div class="logo">PeppyProduce</div></a>
+            <nav class="nav-links">
+                <div class="dropdown">
+                    <a href="#products" class="dropdown-toggle">CATEGORY</a>
+                    <div class="dropdown-content">
+                        <a href="dairy-list.html">Milk & Dairy Products</a>
+                        <a href="#product-domain2">Veggies & Fruits</a>
+                        <a href="#product-domain3">Grocery & Staples</a>
+                        <a href="#product-domain3">Processed & Packed Food</a>
+                        <a href="#product-domain3">Cleaning Essentials</a>
+                    </div>
+                </div>
+                <a href="#subscription" class="active">SUBSCRIPTION</a>
+                <a href="cart.html" class="cart-counter">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                </a>
+                <div class="profile-icon">
+                    <i class="fas fa-user-circle"></i>
+                    <div class="dropdown-menu">
+                        <a href="#view-profile">View Profile</a>
+                        <a href="index.html">Logout</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="cart-container" id="cart-container">
+        <!-- Cart items will be dynamically inserted here -->
+    </div>
+
+    <div class="checkout-container">
+        <h2>Checkout</h2>
+        <form id="checkout-form">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            <div class="form-group">
+                <label for="payment-method">Payment Method:</label>
+                <select id="payment-method" name="payment-method" required>
+                    <option value="credit-card">Credit Card</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="bank-transfer">Bank Transfer</option>
+                </select>
+            </div>
+            <button type="submit" class="checkout-btn">Complete Purchase</button>
+        </form>
+        <p id="checkout-message"></p>
+    </div>
+
+    <footer>
+        <div class="footer-upper">
+            <div class="footer-address">
+                <h4>Address</h4>
+                <p>1234 Elm St</p>
+                <p>Suite 567</p>
+                <p>Springfield, USA</p>
+            </div>
+            <div class="footer-about">
+                <h4>About</h4>
+                <a href="#faq">FAQ</a>
+                <a href="#terms">Terms and Conditions</a>
+                <a href="#privacy">Privacy Policy</a>
+            </div>
+            <div class="footer-social">
+                <h4>Connect with us</h4>
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 404 Brain Not Found. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function updateCartCount() {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            document.getElementById('cart-count').textContent = cartItems.length;
+        }
+
+        function displayCartItems() {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const cartContainer = document.getElementById('cart-container');
+            cartContainer.innerHTML = ''; // Clear the container first
+
+            if (cartItems.length === 0) {
+                cartContainer.innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
+                return;
+            }
+
+            cartItems.forEach((item, index) => {
+                const cartItemDiv = document.createElement('div');
+                cartItemDiv.classList.add('cart-item');
+                cartItemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div>
+                        <h4>${item.name}</h4>
+                        <p>Price: ${item.price}</p>
+                    </div>
+                    <button class="remove-btn" data-index="${index}">Remove</button>
+                `;
+                cartContainer.appendChild(cartItemDiv);
+
+                cartItemDiv.querySelector('.remove-btn').addEventListener('click', () => {
+                    removeCartItem(index);
+                });
+            });
+        }
+
+        function removeCartItem(index) {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            cartItems.splice(index, 1);
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            displayCartItems();
+            updateCartCount();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            displayCartItems();
+            updateCartCount();
+        });
+
+        document.getElementById('checkout-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Simulate a successful checkout
+            const name = document.getElementById('name').value;
+            const address = document.getElementById('address').value;
+            const paymentMethod = document.getElementById('payment-method').value;
+
+            document.getElementById('checkout-message').textContent = `
+                Thank you for your purchase, ${name}! Your order will be shipped to ${address}.
+                Payment Method: ${paymentMethod}.
+            `;
+
+            // Clear the cart
+            localStorage.removeItem('cartItems');
+            document.getElementById('cart-container').innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
+            document.getElementById('cart-count').textContent = '0';
+        });
+    </script>
+</body>
+</html>

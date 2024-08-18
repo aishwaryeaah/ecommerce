@@ -7,23 +7,30 @@
     <link rel="stylesheet" href="dash-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        .product-detail {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            max-width: 800px;
-            margin: auto;
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
-        .product-detail img {
-            max-width: 100%;
+        .product-container {
+            display: flex;
+            gap: 20px;
+            margin: 20px auto;
+            width: 70%;
+            max-width: 1200px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .product-container img {
+            max-width: 400px;
             height: auto;
         }
-        .product-detail h1 {
-            margin-top: 20px;
+        .product-info {
+            max-width: 600px;
         }
-        .product-detail p {
-            margin: 10px 0;
+        .product-info h1 {
+            margin: 0;
         }
         .order-now-btn {
             display: inline-block;
@@ -33,7 +40,8 @@
             text-align: center;
             text-decoration: none;
             border-radius: 5px;
-            margin-top: 20px;
+            cursor: pointer;
+            margin-top: 10px;
         }
         .order-now-btn:hover {
             background-color: #0056b3;
@@ -45,12 +53,31 @@
             border-radius: 5px;
             font-weight: bold;
         }
+        .added-to-cart {
+            background-color: #28a745;
+        }
+        .added-to-cart:hover {
+            background-color: #218838;
+        }
+        .already-added {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .subscription-dropdown {
+            margin-top: 10px;
+        }
+        .subscription-dropdown select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="navbar">
-            <div class="logo">Dashboard</div>
+            <a href="dashboard.html"><div class="logo">Dashboard</div></a>
             <nav class="nav-links">
                 <div class="dropdown">
                     <a href="#products" class="dropdown-toggle">Category</a>
@@ -60,8 +87,11 @@
                         <a href="#product-domain3">Product Domain 3</a>
                     </div>
                 </div>
-                <a href="#subscription">My Subscription</a>
-                <a href="#cart">My Cart</a>
+                <a href="subscription.html">My Subscription</a>
+                <a href="cart.html" class="cart-counter">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                </a>
                 <div class="profile-icon">
                     <i class="fas fa-user-circle"></i>
                     <div class="dropdown-menu">
@@ -72,55 +102,89 @@
             </nav>
         </div>
     </header>
+
+    <div class="tracker">
+        <a href="dashboard.html">Home</a> > <a href="dairy-list.html">Dairy Products</a> > <span id="product-name">Product Name</span>
+    </div>
+
+    <div class="dashboard-content">
+        <div class="main-section">
+            <div class="product-container" id="product-detail">
+                <!-- Product detail will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
     
-    <div class="tracker" id="tracker">
-        <!-- Breadcrumb trail will be dynamically inserted here -->
-    </div>
-
-    <div class="product-detail" id="product-detail">
-        <!-- Product details will be dynamically inserted here -->
-    </div>
-
     <footer>
         <p>&copy; 2024 My Platform. All rights reserved.</p>
     </footer>
-
+    
     <script>
-        // Fetch and display product details
-        const params = new URLSearchParams(window.location.search);
-        const productId = params.get('id');
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
 
-        fetch('products.json')
+        function renderProductDetail(product) {
+            const productDetail = document.getElementById('product-detail');
+            const isInCart = localStorage.getItem(`cart_${product.id}`) !== null;
+            productDetail.innerHTML = `
+                <img src="${product.detailImage}" alt="${product.name}">
+                <div class="product-info">
+                    <h1>${product.name}</h1>
+                    <p>Price: ${product.price}</p>
+                    <p>Description: ${product.description}</p>
+                    <div class="subscription-dropdown">
+                        <label for="subscription-type">Subscription Type:</label>
+                        <select id="subscription-type">
+                            <option value="weekly">Weekly</option>
+                            <option value="bi-weekly">Bi-Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                    </div>
+                    <a class="order-now-btn ${isInCart ? 'added-to-cart' : ''}" href="#" onclick="addToCart('${product.id}')">
+                        ${isInCart ? 'Already Added' : 'Add to Cart'}
+                    </a>
+                </div>
+            `;
+            document.getElementById('product-name').textContent = product.name;
+        }
+
+        function addToCart(productId) {
+            const cartCountElem = document.getElementById('cart-count');
+            const isInCart = localStorage.getItem(`cart_${productId}`) !== null;
+
+            if (isInCart) {
+                alert('This product is already in your cart.');
+                return;
+            }
+
+            localStorage.setItem(`cart_${productId}`, productId);
+            cartCountElem.textContent = parseInt(cartCountElem.textContent) + 1;
+            document.querySelector('.order-now-btn').classList.add('added-to-cart');
+            document.querySelector('.order-now-btn').textContent = 'Already Added';
+        }
+
+        fetch('dairy.json')
             .then(response => response.json())
             .then(data => {
+                const productId = getQueryParam('id');
                 const product = data.find(p => p.id == productId);
-                
                 if (product) {
-                    const tracker = document.getElementById('tracker');
-                    tracker.innerHTML = `
-                        <a href="index.html">Home</a> > <a href="dairy-list.html">Dairy Products</a> > ${product.name}
-                    `;
-                    
-                    const productDetail = document.getElementById('product-detail');
-                    productDetail.innerHTML = `
-                        <img src="${product.detailImage}" alt="${product.name}">
-                        <h1>${product.name}</h1>
-                        <p>${product.description}</p>
-                        <p>Price: ${product.price}</p>
-                        <div class="product-dropdown">
-                            <select>
-                                <option>Weekly</option>
-                                <option>Bi-Weekly</option>
-                                <option>Monthly</option>
-                            </select>
-                        </div>
-                        <a href="#" class="order-now-btn">Add to Cart</a>
-                    `;
+                    renderProductDetail(product);
                 } else {
-                    document.getElementById('product-detail').innerHTML = '<p>Product not found.</p>';
+                    document.getElementById('product-detail').innerHTML = 'Product not found.';
                 }
             })
             .catch(error => console.error('Error fetching product details:', error));
+
+            function updateCartCount() {
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        document.getElementById('cart-count').textContent = cartItems.length;
+    }
+
+    // Initialize cart count on page load
+    updateCartCount();
     </script>
 </body>
 </html>

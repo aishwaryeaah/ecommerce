@@ -11,81 +11,97 @@
 <body>
     <header>
         <div class="navbar">
-            <div class="logo">My Platform</div>
-            <nav>
-                <a href="#home">Home</a>
-                <a href="#how-it-works">How it Works</a>
-                <a href="#features">Features</a>
-                <a href="#contact">Contact</a>
-            </nav>
+            <div class="logo">PeppyProduce</div>
+            <div class="menu-icon" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
     </header>
     
-    <div class="main-container" id="home">
-        <div class="left-content">
-            <img src="image.jpg" alt="Left Image" class="image">
-            <h3>Welcome to Our Platform</h3>
-            <p>Sign in to continue or create a new account.</p>
+    <aside id="sidebar">
+        <div class="close-btn" onclick="toggleSidebar()">
+            <i class="fas fa-times"></i>
         </div>
-        <div class="right-content">
-            <div class="form-container">
-                <h2>Login</h2>
-                <form action="dummy-user.html" method="GET">
-                    <input type="email" name="email" placeholder="Email ID" required>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <button type="submit">Login</button>
-                </form>
-                
-                <a href="#" class="link" onclick="toggleSignup()">Don't have an account? Signup</a>
-            </div>
+        <a href="#how-it-works">How it Works?</a>
+        <a href="#features">Features</a>
+    </aside>
 
-            <div class="form-container" id="signup-container" style="display:none;">
-                <h2>Signup</h2>
-                <form action="/signup" method="POST" onsubmit="return validateSignupForm()">
-                    <div class="name-container">
-                        <input type="text" name="firstName" placeholder="First Name" required>
-                        <input type="text" name="lastName" placeholder="Last Name" required>
-                    </div>
-                    <input type="email" name="email" placeholder="Email ID" required>
-                    <div class="password-container">
-                        <input type="password" name="password" placeholder="Password" id="signup-password" required>
-                        <i class="far fa-eye toggle-password" onclick="toggleSignupPassword()"></i>
-                    </div>
-                    <div class="password-container">
-                        <input type="password" name="confirmPassword" placeholder="Confirm Password" id="confirm-password" required>
-                        <i class="far fa-eye toggle-password" onclick="toggleConfirmPassword()"></i>
-                    </div>
-                    <input type="text" name="phone" placeholder="Phone Number" required>
-                    <input type="text" name="address" placeholder="Address" required>
-                    <small id="password-error" class="error-message"></small>
-                    <button type="submit">Signup</button>
-                </form>
-                <a href="#" class="link" onclick="toggleLogin()">Already have an account? Login</a>
+    <main>
+        <div class="main-container" id="home">
+            <div class="left-content">
+                <img src="image.jpg" class="image">
             </div>
+            <div class="right-content">
+                <!-- Login Form -->
+<div class="form-container">
+    <h2>Login</h2>
+    <form action="dummy-user.html" method="GET">
+        <input type="email" name="email" placeholder="Email ID" required>
+        <div class="password-container">
+            <input type="password" name="password" placeholder="Password" id="login-password" required>
+            <i class="far fa-eye toggle-login-password" onclick="toggleLoginPassword()"></i>
         </div>
-    </div>
-    
-    <div class="info-section">
-        <section id="how-it-works" class="info-section-section">
-            <h2>How it Works</h2>
-            <p>Explain how your platform works here.</p>
-        </section>
-        
-        <section id="features" class="info-section-section">
-            <h2>Features</h2>
-            <p>Highlight the features of your platform here.</p>
-        </section>
-        
-        <section id="contact" class="info-section-section">
-            <h2>Contact Us</h2>
-            <p>Get in touch with us here.</p>
-        </section>
-    </div>
-    
+        <button type="submit">Login</button>
+    </form>
+    <a href="#" class="link" onclick="toggleSignup()">Don't have an account? Signup</a>
+</div>
+
+<!-- Signup Form -->
+<div class="form-container" id="signup-container" style="display:none;">
+    <h2>Signup</h2>
+    <form action="/signup" method="POST" onsubmit="return validateSignupForm()">
+        <div class="name-container">
+            <input type="text" name="firstName" placeholder="First Name" required>
+            <input type="text" name="lastName" placeholder="Last Name" required>
+        </div>
+        <input type="email" name="email" placeholder="Email ID" required>
+        <div class="password-container">
+            <input type="password" name="password" placeholder="Password" id="signup-password" required>
+            <i class="far fa-eye toggle-password" onclick="toggleSignupPassword()"></i>
+        </div>
+        <div class="password-container">
+            <input type="password" name="confirmPassword" placeholder="Confirm Password" id="confirm-password" required>
+            <i class="far fa-eye toggle-confirm-password" onclick="toggleConfirmPassword()"></i>
+        </div>
+        <input type="text" name="phone" placeholder="Phone Number" required>
+        <input type="text" name="address" placeholder="Address" required>
+        <small id="password-error" class="error-message"></small>
+        <button type="submit">Signup</button>
+    </form>
+    <a href="#" class="link" onclick="toggleLogin()">Already have an account? Login</a>
+</div>
+
+        </div>
+    </main>
 
     <footer>
-        <p>&copy; 2024 My Platform. All rights reserved.</p>
+        <div class="footer-upper">
+            <div class="footer-address">
+                <h4>Address</h4>
+                <p>1234 Elm St</p>
+                <p>Suite 567</p>
+                <p>Springfield, USA</p>
+            </div>
+            <div class="footer-about">
+                <h4>About</h4>
+                <a href="#faq">FAQ</a>
+                <a href="#terms">Terms and Conditions</a>
+                <a href="#privacy">Privacy Policy</a>
+            </div>
+            <div class="footer-social">
+                <h4>Connect with us</h4>
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 404 Brain Not Found. All rights reserved.</p>
+        </div>
     </footer>
+    
+    
 
     <script src="scripts.js"></script>
 </body>
