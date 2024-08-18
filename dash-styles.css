@@ -1,0 +1,221 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 24px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 16px;
+    margin-right: 20px; /* Add space between items */
+    position: relative; /* To position the dropdown */
+}
+
+.nav-links a:last-child {
+    margin-right: 0; /* Remove margin for the last item */
+}
+
+
+.nav-links a:hover {
+    background: #555;
+}
+
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%; /* Position below the link */
+    left: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.profile-icon {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.profile-icon i {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%; /* Position below the profile icon */
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-menu a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}
+
+.profile-icon:hover .dropdown-menu {
+    display: block;
+}
+
+.dashboard-content {
+    padding: 20px;
+}
+
+
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.main-section {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.tab-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-content {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    flex: 1; /* Make it take the full height available */
+}
+
+.dairy-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 40vh; /* Full viewport height */
+}
+
+.dairy-image {
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.order-now-btn {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 10px; /* Space above the button */
+}
+
+.order-now-btn:hover {
+    background-color: #555;
+}
+
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    height: 100vh; /* Full viewport height */
+}
+
+.tab {
+    background: #f0f0f0;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    flex: 1 1 calc(50% - 40px); /* Two tabs per row with margin */
+    max-width: 500px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.tab h3 {
+    margin-top: 10px;
+}
+
+.tab .order-now-btn {
+    margin-top: 10px; /* Space above the button */
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <link rel="stylesheet" href="dash-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .product-detail {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .product-detail img {
+            max-width: 100%;
+            height: auto;
+        }
+        .product-detail h1 {
+            margin-top: 20px;
+        }
+        .product-detail p {
+            margin: 10px 0;
+        }
+        .order-now-btn {
+            display: inline-block;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .order-now-btn:hover {
+            background-color: #0056b3;
+        }
+        .tracker {
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">Dashboard</div>
+            <nav class="nav-links">
+                <div class="dropdown">
+                    <a href="#products" class="dropdown-toggle">Category</a>
+                    <div class="dropdown-content">
+                        <a href="#product-domain1">Product Domain 1</a>
+                        <a href="#product-domain2">Product Domain 2</a>
+                        <a href="#product-domain3">Product Domain 3</a>
+                    </div>
+                </div>
+                <a href="#subscription">My Subscription</a>
+                <a href="#cart">My Cart</a>
+                <div class="profile-icon">
+                    <i class="fas fa-user-circle"></i>
+                    <div class="dropdown-menu">
+                        <a href="#view-profile">View Profile</a>
+                        <a href="index.html">Logout</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="tracker" id="tracker">
+        <!-- Breadcrumb trail will be dynamically inserted here -->
+    </div>
+
+    <div class="product-detail" id="product-detail">
+        <!-- Product details will be dynamically inserted here -->
+    </div>
+
+    <footer>
+        <p>&copy; 2024 My Platform. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Fetch and display product details
+        const params = new URLSearchParams(window.location.search);
+        const productId = params.get('id');
+
+        fetch('products.json')
+            .then(response => response.json())
+            .then(data => {
+                const product = data.find(p => p.id == productId);
+                
+                if (product) {
+                    const tracker = document.getElementById('tracker');
+                    tracker.innerHTML = `
+                        <a href="index.html">Home</a> > <a href="dairy-list.html">Dairy Products</a> > ${product.name}
+                    `;
+                    
+                    const productDetail = document.getElementById('product-detail');
+                    productDetail.innerHTML = `
+                        <img src="${product.detailImage}" alt="${product.name}">
+                        <h1>${product.name}</h1>
+                        <p>${product.description}</p>
+                        <p>Price: ${product.price}</p>
+                        <div class="product-dropdown">
+                            <select>
+                                <option>Weekly</option>
+                                <option>Bi-Weekly</option>
+                                <option>Monthly</option>
+                            </select>
+                        </div>
+                        <a href="#" class="order-now-btn">Add to Cart</a>
+                    `;
+                } else {
+                    document.getElementById('product-detail').innerHTML = '<p>Product not found.</p>';
+                }
+            })
+            .catch(error => console.error('Error fetching product details:', error));
+    </script>
+</body>
+</html>

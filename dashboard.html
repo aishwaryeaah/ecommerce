@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Dashboard</title>
+    <link rel="stylesheet" href="dash-styles.css">
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">Dashboard</div>
+            <nav class="nav-links">
+                <div class="dropdown">
+                    <a href="#products" class="dropdown-toggle">Category</a>
+                    <div class="dropdown-content">
+                        <a href="#product-domain1">Product Domain 1</a>
+                        <a href="#product-domain2">Product Domain 2</a>
+                        <a href="#product-domain3">Product Domain 3</a>
+                    </div>
+                </div>
+                <a href="#subscription">My Subscription</a>
+                <a href="#cart">My Cart</a>
+                <div class="profile-icon">
+                    <i class="fas fa-user-circle"></i>
+                    <div class="dropdown-menu">
+                        <a href="#view-profile">View Profile</a>
+                        <a href="index.html">Logout</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="dashboard-content">
+        <div class="main-section">
+            <div class="tab-container">
+                <div class="tab-content">
+                    <h2>Milk & Dairy Products</h2>
+                    <div class="dairy-content">
+                        <img src="dairy-image.jpg" alt="dairy" class="dairy-image">
+                        <a href="dairy-list.html" class="order-now-btn">Order Now</a>
+                    </div>
+                </div>
+                <div class="tabs">
+                    <div class="tab" id="groceries">
+                        <h3>Groceries & Staples</h3>
+                        <img src="groceries.jpg" alt="Atta, Dal, Rice" class="tab-image">
+                        <a href="groceries-list.html" class="order-now-btn">Order Now</a>
+                    </div>
+                    <div class="tab" id="snacks">
+                        <h3>Processed & Packed Foods</h3>
+                        <img src="snacks.jpg" alt="Snacks" class="tab-image">
+                        <a href="snacks-list.html" class="order-now-btn">Order Now</a>
+                    </div>
+                    <div class="tab" id="veggies-fruits">
+                        <h3>Veggies & Fruits</h3>
+                        <img src="veggies-fruits.jpg" alt="Veggies & Fruits" class="tab-image">
+                        <a href="veggies-fruits-list.html" class="order-now-btn">Order Now</a>
+                    </div>
+                    <div class="tab" id="cleaning-essentials">
+                        <h3>Cleaning Essentials</h3>
+                        <img src="cleaning-essentials.jpg" alt="Cleaning Essentials" class="tab-image">
+                        <a href="cleaning-essentials-list.html" class="order-now-btn">Order Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 My Platform. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "name": "Product Name 1",
+        "image": "dairy-product1.jpg",
+        "price": "$5.00",
+        "description": "Description of Product 1.",
+        "detailImage": "dairy-product1-detail.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Product Name 2",
+        "image": "dairy-product2.jpg",
+        "price": "$6.00",
+        "description": "Description of Product 2.",
+        "detailImage": "dairy-product2-detail.jpg"
+    }
+]
