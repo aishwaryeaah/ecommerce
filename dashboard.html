@@ -19,7 +19,6 @@
                         <a href="#product-domain2">Veggies & Fruits</a>
                         <a href="#product-domain3">Grocery & Staples</a>
                         <a href="#product-domain3">Processed & Packed Food</a>
-                        <a href="#product-domain3">Cleaning Essentials</a>
                     </div>
                 </div>
                 <a href="subscription.html">SUBSCRIPTION</a>
@@ -64,11 +63,6 @@
                     <img src="https://images.pexels.com/photos/13000111/pexels-photo-13000111.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Veggies & Fruits" class="tab-image">
                     <a href="veggies-fruits-list.html" class="order-now-btn">Order Now</a>
                 </div>
-                <div class="tab" id="cleaning-essentials">
-                    <h3>Cleaning Essentials</h3>
-                    <img src="https://images.pexels.com/photos/7451952/pexels-photo-7451952.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Cleaning Essentials" class="tab-image">
-                    <a href="cleaning-essentials-list.html" class="order-now-btn">Order Now</a>
-                </div>
             </div>
         </div>
     </div>
@@ -104,11 +98,15 @@
         // Function to update cart count
         function updateCartCount() {
             const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            document.getElementById('cart-count').textContent = cartItems.length;
+            const cartCountElem = document.getElementById('cart-count');
+            if (cartCountElem) {
+                cartCountElem.textContent = cartItems.length;
+            }
         }
-
-        // Initialize cart count on page load
-        updateCartCount();
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount();
+        });
     </script>
 </body>
 </html>

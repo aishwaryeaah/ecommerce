@@ -7,41 +7,119 @@
     <link rel="stylesheet" href="dash-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        html, body {
-            height: 100%; /* Ensure the body takes up the full height */
-            margin: 0;
+        body, h1, h2, h3, a {
+            color: #000000;
         }
-
         body {
-            display: flex;
-            flex-direction: column; /* Stack elements vertically */
+            background-color: #f8f9fa;
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
-
+        /* Remove underline from all links */
+        a {
+            text-decoration: none;
+        }
+        /* Button and link styles */
+        .order-now-btn, .dropdown-content a, .footer-about a {
+            text-decoration: none;
+        }
         header {
             background: transparent;
             color: #000000;
-            padding: 10px 0;
+            padding: 20px 0;
         }
-
-        .content {
-            flex: 1; /* Allow content to take up available space */
+        .navbar {
             display: flex;
-            flex-direction: column; /* Stack tabs and content vertically */
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
         }
-
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #FECA09;
+            text-shadow: 2px 2px 0 #000;
+        }
+        .logo a {
+            text-decoration: none !important;
+            border: none !important;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        .nav-links a {
+            color: #000000;
+            text-decoration: none;
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 20px;
+            position: relative;
+            font-weight: 700;
+        }
+        .nav-links a:last-child {
+            margin-right: 0;
+        }
+        .nav-links a:hover {
+            background: #deb214;
+            border-radius: 10px;
+        }
+        .dropdown {
+            position: relative;
+            font-size: smaller;
+        }
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+        .dropdown-content, .profile-icon .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            font-size: 14px;
+            min-width: 200px;
+            border-radius: 8px;
+        }
+        .dropdown-content a, .profile-icon .dropdown-menu a {
+            color: #333333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: small;
+            font-weight: 200;
+        }
+        .dropdown-content a:hover, .profile-icon .dropdown-menu a:hover {
+            background-color: #f0f0f0;
+        }
+        .dropdown:hover .dropdown-content, .profile-icon:hover .dropdown-menu {
+            display: block;
+        }
+        .profile-icon {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .profile-icon i {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
         .tabs-container {
             display: flex;
-            flex-direction: column; /* Stack tabs and content vertically */
-            height: calc(100vh - 80px); /* Full viewport height minus header height */
+            flex-direction: column;
+            height: calc(100vh - 80px);
             overflow: hidden;
         }
-
         .tabs {
             display: flex;
             width: 100%;
-            height: 400px; /* Set the height of the tabs to 400px */
+            height: 400px;
         }
-
         .tab {
             flex: 1;
             text-align: center;
@@ -53,193 +131,75 @@
             box-sizing: border-box;
             height: 100%;
         }
-
         .tab.active {
             background-color: #e0e0e0;
             color: #333;
             border-bottom: 1px solid transparent;
         }
-
         .tab-content {
-            flex: 1; /* Allow content to take up remaining space */
+            flex: 1;
             display: flex;
             flex-direction: column;
-            height: 100%; /* Full height to match the tabs container */
+            height: 100%;
             overflow-y: auto;
             padding: 20px;
         }
-
         footer {
             width: 100%;
             background-color: #000;
             color: #fff;
             font-family: 'Campton', sans-serif;
-            margin-top: auto; /* Push footer to the bottom */
+            margin-top: auto;
         }
-
-        /* General styles */
-        body, h1, h2, h3, a {
-            color: #000000;
-        }
-
-        body {
-            background-color: #f8f9fa;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .order-now-btn, .dropdown-content a, .footer-about a {
-            text-decoration: none;
-        }
-
-        /* Header and navigation styling */
-        .navbar {
+        .footer-upper {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
+            align-items: flex-start;
+            padding: 20px 50px;
+            border-bottom: 1px solid #444;
+            text-align: left;
         }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 700; /* Use Campton Black */
-            color: #FECA09; /* Change color to match nav text */
-            text-shadow: 2px 2px 0 #000; /* Solid shadow effect in the bottom-right corner */
+        .footer-address {
+            flex: 1;
+            text-align: left;
         }
-
-        .logo a {
-            text-decoration: none !important;
-            border: none !important; /* Check if border is causing visual issues */
+        .footer-address p {
+            margin: 5px 0;
+            font-size: smaller;
         }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
+        .footer-about {
+            flex: 1;
+            text-align: left;
         }
-
-        .nav-links a {
-            color: #000000;
-            text-decoration: none; /* Remove underline */
+        .footer-about a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            font-size: smaller;
+            margin: 5px 0;
+        }
+        .footer-about a:hover {
+            text-decoration: underline;
+        }
+        .footer-social {
+            flex: 1;
+            text-align: right;
+        }
+        .footer-social .social-icon {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 20px;
+        }
+        .footer-social .social-icon:hover {
+            color: #6b7e09;
+        }
+        .footer-bottom {
+            text-align: center;
             padding: 10px;
-            font-size: 16px;
-            margin-right: 20px;
-            position: relative;
-            font-weight: 700;
+            background-color: #000;
+            color: #fff;
         }
-
-        .nav-links a:last-child {
-            margin-right: 0;
-        }
-
-        .nav-links a:hover {
-            background: #333;
-        }
-
-        .dropdown {
-            position: relative;
-            font-size: smaller;
-        }
-
-        .dropdown-toggle {
-            cursor: pointer;
-        }
-
-        .dropdown-content, .dropdown-menu {
-            display: none;
-            position: absolute;
-            background-color: #000000;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-            z-index: 1;
-            font-size: smaller;
-        }
-
-        .dropdown-content a, .dropdown-menu a {
-            color: #FECA09;
-            padding: 12px 16px;
-            text-decoration: none; /* Remove underline */
-            display: block;
-            font-size: small; /* Adjust font size here */
-            font-weight: 200;
-        }
-
-        .dropdown-content a:hover, .dropdown-menu a:hover {
-            background-color: #333;
-        }
-
-        .dropdown:hover .dropdown-content, .profile-icon:hover .dropdown-menu {
-            display: block;
-        }
-
-        /* Dropdown menu for profile icon */
-        .profile-icon .dropdown-menu {
-            display: none;
-            position: absolute;
-            background-color: #000000;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-            z-index: 1;
-            font-size: 14px; /* Font size for profile dropdown items */
-            right: 0; /* Align the dropdown to the right */
-            top: 100%; /* Position the dropdown below the profile icon */
-            min-width: 200px; /* Set the width to match the category dropdown */
-            border-radius: 8px; /* Rounded corners */
-        }
-
-        .profile-icon:hover .dropdown-menu {
-            display: block;
-        }
-
-        .profile-icon .dropdown-menu a {
-            color: #FECA09;
-            padding: 12px 16px;
-            text-decoration: none; /* Remove underline */
-            display: block;
-        }
-
-        .profile-icon .dropdown-menu a:hover {
-            background-color: #333;
-        }
-
-        /* Dropdown menu for category */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #000000;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-            z-index: 1;
-            font-size: 14px; /* Font size for category dropdown items */
-            min-width: 200px; /* Set the width to match the profile dropdown */
-            border-radius: 8px; /* Rounded corners */
-        }
-
-        .dropdown-content a {
-            color: #FECA09;
-            padding: 12px 16px;
-            text-decoration: none; /* Remove underline */
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #333;
-        }
-
-        /* Ensure dropdowns display on hover */
-        .dropdown:hover .dropdown-content, .profile-icon:hover .dropdown-menu {
-            display: block;
-        }
-
-        .profile-icon {
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-
-        .profile-icon i {
-            font-size: 24px;
-            cursor: pointer;
-        }
-
         .subscription-item {
             display: flex;
             align-items: center;
@@ -250,92 +210,22 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             background-color: #fff;
         }
-
         .subscription-item img {
             width: 100px;
             height: 100px;
             object-fit: cover;
             margin-right: 15px;
         }
-
         .subscription-item h4 {
             margin: 0;
         }
-
         .tracker {
             background-color: #f8f9fa;
-            padding: 10px;
+            padding: 20px;
             margin-bottom: 20px;
             border-radius: 5px;
             font-weight: 200;
             font-size: small;
-        }
-
-        footer {
-            width: 100%;
-            background-color: #000;
-            color: #fff;
-            font-family: 'Campton', sans-serif;
-            margin-top: auto; /* Push footer to the bottom */
-        }
-
-        .footer-upper {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 20px 50px;
-            border-bottom: 1px solid #444;
-            text-align: left;
-        }
-
-        .footer-address {
-            flex: 1;
-            text-align: left;
-        }
-
-        .footer-address p {
-            margin: 5px 0;
-            font-size: smaller;
-        }
-
-        .footer-about {
-            flex: 1;
-            text-align: left;
-        }
-
-        .footer-about a {
-            display: block;
-            color: #fff;
-            text-decoration: none;
-            font-size: smaller;
-            margin: 5px 0;
-        }
-
-        .footer-about a:hover {
-            text-decoration: underline;
-        }
-
-        .footer-social {
-            flex: 1;
-            text-align: right;
-        }
-
-        .footer-social .social-icon {
-            color: #fff;
-            text-decoration: none;
-            margin-left: 15px;
-            font-size: 20px;
-        }
-
-        .footer-social .social-icon:hover {
-            color: #6b7e09;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding: 10px;
-            background-color: #000;
-            color: #fff;
         }
     </style>
 </head>
@@ -351,10 +241,9 @@
                         <a href="#product-domain2">Veggies & Fruits</a>
                         <a href="#product-domain3">Grocery & Staples</a>
                         <a href="#product-domain3">Processed & Packed Food</a>
-                        <a href="#product-domain3">Cleaning Essentials</a>
                     </div>
                 </div>
-                <a href="#subscription" class="active">SUBSCRIPTION</a>
+                <a href="subscription.html">SUBSCRIPTION</a>
                 <a href="cart.html" class="cart-counter">
                     <i class="fas fa-shopping-cart"></i>
                     <span id="cart-count">0</span>
@@ -414,13 +303,15 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            function updateCartCount() {
-                const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-                document.getElementById('cart-count').textContent = cartItems.length;
+        function updateCartCount() {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const cartCountElem = document.getElementById('cart-count');
+            if (cartCountElem) {
+                cartCountElem.textContent = cartItems.length;
             }
-
-            // Initialize cart count on page load
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
             updateCartCount();
         });
     </script>

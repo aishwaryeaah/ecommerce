@@ -2,8 +2,8 @@ body {
     font-family: Campton, Arial, sans-serif;
     margin: 0;
     padding: 0;
-    
 }
+
 header a, .nav-links a, .footer-about a {
     color: #000000; /* Set link color */
     text-decoration: none; /* Remove underline */
@@ -12,6 +12,7 @@ header a, .nav-links a, .footer-about a {
 header a:hover, .nav-links a:hover, .footer-about a:hover {
     text-decoration: none; /* Ensure no underline on hover */
 }
+
 html, body {
     margin: 0;
     padding: 0;
@@ -21,7 +22,7 @@ html, body {
 header {
     background: transparent;
     color: #000000;
-    padding: 10px 0;
+    padding: 20px 0;
 }
 
 .navbar {
@@ -64,7 +65,8 @@ header {
 }
 
 .nav-links a:hover {
-    background: #333;
+    background: #deb214;
+    border-radius: 10px;
 }
 
 .dropdown {
@@ -76,17 +78,21 @@ header {
     cursor: pointer;
 }
 
-.dropdown-content, .dropdown-menu {
+.dropdown-content,
+.profile-icon .dropdown-menu {
     display: none;
     position: absolute;
-    background-color: #000000;
+    background-color: #ffffff; /* Fully opaque background */
     box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
     z-index: 1;
-    font-size: smaller;
+    font-size: 14px; /* Font size for dropdown items */
+    min-width: 200px; /* Set the width to match the profile dropdown */
+    border-radius: 8px; /* Rounded corners */
 }
 
-.dropdown-content a, .dropdown-menu a {
-    color: #FECA09;
+.dropdown-content a,
+.profile-icon .dropdown-menu a {
+    color: #333333; /* Off-black text color */
     padding: 12px 16px;
     text-decoration: none; /* Remove underline */
     display: block;
@@ -94,70 +100,28 @@ header {
     font-weight: 200;
 }
 
-.dropdown-content a:hover, .dropdown-menu a:hover {
-    background-color: #333;
+.dropdown-content a:hover,
+.profile-icon .dropdown-menu a:hover {
+    background-color: #f0f0f0; /* Slight background change on hover */
 }
 
-
-.dropdown:hover .dropdown-content, .profile-icon:hover .dropdown-menu {
-    display: block;
-}
-
-/* Dropdown menu for profile icon */
+/* Profile Icon Dropdown Styles */
 .profile-icon .dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: #000000;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-    z-index: 1;
-    font-size: 14px; /* Font size for profile dropdown items */
     right: 0; /* Align the dropdown to the right */
     top: 100%; /* Position the dropdown below the profile icon */
-    min-width: 200px; /* Set the width to match the category dropdown */
+    width: 100%; /* Ensure it matches the width of the profile icon */
     border-radius: 8px; /* Rounded corners */
+    background-color: #ffffff; /* Fully opaque background */
 }
 
+/* Ensure dropdowns display on hover */
+.dropdown:hover .dropdown-content,
 .profile-icon:hover .dropdown-menu {
     display: block;
 }
 
-.profile-icon .dropdown-menu a {
-    color: #FECA09;
-    padding: 12px 16px;
-    text-decoration: none; /* Remove underline */
-    display: block;
-}
-
-.profile-icon .dropdown-menu a:hover {
-    background-color: #333;
-}
-
-/* Dropdown menu for category */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #000000;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-    z-index: 1;
-    font-size: 14px; /* Font size for category dropdown items */
-    min-width: 200px; /* Set the width to match the profile dropdown */
-    border-radius: 8px; /* Rounded corners */
-}
-
-.dropdown-content a {
-    color: #FECA09;
-    padding: 12px 16px;
-    text-decoration: none; /* Remove underline */
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #333;
-}
-
-/* Ensure dropdowns display on hover */
-.dropdown:hover .dropdown-content, .profile-icon:hover .dropdown-menu {
-    display: block;
+.nav-links .dropdown:hover .dropdown-content {
+    width: 100%; /* Full width of the dropdown toggle */
 }
 
 .profile-icon {
@@ -274,11 +238,13 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #FECA09;
+    color: #f8f9fa; /* Off-white color for the tab headings */
     text-align: center;
     background: rgba(0, 0, 0, 0.5);
     padding: 20px;
     box-sizing: border-box;
+    font-family: 'Georgia', serif; /* Formal serif font for product names */
+    font-weight: 500;
 }
 
 .content-overlay h2 {
@@ -293,7 +259,7 @@ footer {
     text-decoration: none; /* Remove underline */
     border-radius: 8px;
     font-size: 16px;
-    margin-top: 10px;
+    margin-top: 30px;
     box-shadow: 4px 4px 0 0 #000000;
 }
 
@@ -304,9 +270,11 @@ footer {
 .tabs {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
+    justify-content: space-between; /* Adjust spacing between tabs */
+    gap: 20px;
     margin-top: 20px;
+    width: calc(100% - 30px);
+    margin: 0 15px;
 }
 
 .tab {
@@ -315,8 +283,8 @@ footer {
     border-radius: 8px;
     padding: 20px;
     text-align: center;
-    flex: 1 1 calc(50% - 30px);
-    max-width: 500px;
+    flex: 1 1 calc(25% - 20px); /* Updated width calculation for 4 tabs */
+    max-width: 100%; /* Removed the previous max-width */
     box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
@@ -324,7 +292,7 @@ footer {
     justify-content: center;
     height: 250px;
     overflow: hidden;
-    margin: 0 15px;
+    margin: 0; /* Removed extra margin for better alignment */
 }
 
 .tab-image {
@@ -337,6 +305,7 @@ footer {
     z-index: 1;
     opacity: 0.3;
 }
+
 
 .tab-content-wrapper {
     position: relative;
@@ -352,6 +321,8 @@ footer {
     margin-top: 10px;
     position: relative;
     z-index: 2;
+    color: #f8f9fa; /* Off-white color for the tab headings */
+    font-family: 'Georgia', serif; /* Formal serif font for product names */
 }
 
 .tab .order-now-btn {

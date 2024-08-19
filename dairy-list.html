@@ -24,158 +24,103 @@
         }
         /* Header and navigation styling */
         header {
-    background: transparent;
-    color: #000000;
-    padding: 10px 0;
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: 700; /* Use Campton Black */
-    color: #FECA09; /* Change color to match nav text */
-    text-shadow: 
-        2px 2px 0 #000; /* Solid shadow effect in the bottom-right corner */
-}
-
-.logo a {
-    text-decoration: none !important;
-    border: none !important; /* Check if border is causing visual issues */
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-}
-
-.nav-links a {
-    color: #000000;
-    text-decoration: none; /* Remove underline */
-    padding: 10px;
-    font-size: 16px;
-    margin-right: 20px;
-    position: relative;
-    font-weight: 700;
-}
-
-.nav-links a:last-child {
-    margin-right: 0;
-}
-
-.nav-links a:hover {
-    background: #333;
-}
-
-.dropdown {
-    position: relative;
-    font-size: smaller;
-}
-
-.dropdown-toggle {
-    cursor: pointer;
-}
-
-.dropdown-content, .dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: #000000;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-    z-index: 1;
-    font-size: smaller;
-}
-
-.dropdown-content a, .dropdown-menu a {
-    color: #FECA09;
-    padding: 12px 16px;
-    text-decoration: none; /* Remove underline */
-    display: block;
-    font-size: small; /* Adjust font size here */
-    font-weight: 200;
-}
-
-.dropdown-content a:hover, .dropdown-menu a:hover {
-    background-color: #333;
-}
-
-
-.dropdown:hover .dropdown-content, .profile-icon:hover .dropdown-menu {
-    display: block;
-}
-
-/* Dropdown menu for profile icon */
-.profile-icon .dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: #000000;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-    z-index: 1;
-    font-size: 14px; /* Font size for profile dropdown items */
-    right: 0; /* Align the dropdown to the right */
-    top: 100%; /* Position the dropdown below the profile icon */
-    min-width: 200px; /* Set the width to match the category dropdown */
-    border-radius: 8px; /* Rounded corners */
-}
-
-.profile-icon:hover .dropdown-menu {
-    display: block;
-}
-
-.profile-icon .dropdown-menu a {
-    color: #FECA09;
-    padding: 12px 16px;
-    text-decoration: none; /* Remove underline */
-    display: block;
-}
-
-.profile-icon .dropdown-menu a:hover {
-    background-color: #333;
-}
-
-/* Dropdown menu for category */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #000000;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-    z-index: 1;
-    font-size: 14px; /* Font size for category dropdown items */
-    min-width: 200px; /* Set the width to match the profile dropdown */
-    border-radius: 8px; /* Rounded corners */
-}
-
-.dropdown-content a {
-    color: #FECA09;
-    padding: 12px 16px;
-    text-decoration: none; /* Remove underline */
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #333;
-}
-
-/* Ensure dropdowns display on hover */
-.dropdown:hover .dropdown-content, .profile-icon:hover .dropdown-menu {
-    display: block;
-}
-
-.profile-icon {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-.profile-icon i {
-    font-size: 24px;
-    cursor: pointer;
-}
-
+            background: transparent;
+            color: #000000;
+            padding: 20px 0;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700; /* Use Campton Black */
+            color: #FECA09; /* Change color to match nav text */
+            text-shadow: 
+                2px 2px 0 #000; /* Solid shadow effect in the bottom-right corner */
+        }
+        .logo a {
+            text-decoration: none !important;
+            border: none !important; /* Check if border is causing visual issues */
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        .nav-links a {
+            color: #000000;
+            text-decoration: none; /* Remove underline */
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 20px;
+            position: relative;
+            font-weight: 700;
+        }
+        .nav-links a:last-child {
+            margin-right: 0;
+        }
+        .nav-links a:hover {
+            background: #deb214;
+            border-radius: 10px;
+        }
+        .dropdown {
+            position: relative;
+            font-size: smaller;
+        }
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+        .dropdown-content,
+        .profile-icon .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #ffffff; /* Fully opaque background */
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            font-size: 14px; /* Font size for dropdown items */
+            min-width: 200px; /* Set the width to match the profile dropdown */
+            border-radius: 8px; /* Rounded corners */
+        }
+        .dropdown-content a,
+        .profile-icon .dropdown-menu a {
+            color: #333333; /* Off-black text color */
+            padding: 12px 16px;
+            text-decoration: none; /* Remove underline */
+            display: block;
+            font-size: small; /* Adjust font size here */
+            font-weight: 200;
+        }
+        .dropdown-content a:hover,
+        .profile-icon .dropdown-menu a:hover {
+            background-color: #f0f0f0; /* Slight background change on hover */
+        }
+        /* Profile Icon Dropdown Styles */
+        .profile-icon .dropdown-menu {
+            right: 0; /* Align the dropdown to the right */
+            top: 100%; /* Position the dropdown below the profile icon */
+            width: 100%; /* Ensure it matches the width of the profile icon */
+            border-radius: 8px; /* Rounded corners */
+            background-color: #ffffff; /* Fully opaque background */
+        }
+        /* Ensure dropdowns display on hover */
+        .dropdown:hover .dropdown-content,
+        .profile-icon:hover .dropdown-menu {
+            display: block;
+        }
+        .nav-links .dropdown:hover .dropdown-content {
+            width: 100%; /* Full width of the dropdown toggle */
+        }
+        .profile-icon {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .profile-icon i {
+            font-size: 24px;
+            cursor: pointer;
+        }
         /* Product container and product styling */
         .product-container {
             display: flex;
@@ -184,16 +129,29 @@
             justify-content: center;
             margin-bottom: 20px;
         }
-        .product { 
-            width: calc(25% - 20px);
-            border: 1px solid #ddd;
-            padding: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
         .product img {
-            max-width: 100%;
-            height: auto;
-        }
+    max-width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensures image covers the container without distortion */
+}
+
+.product {
+    width: calc(25% - 20px);
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product img {
+    width: 100%;
+    height: 200px; /* Fixed height for the image container */
+    object-fit: cover; /* Cover the container while maintaining aspect ratio */
+    margin-bottom: 10px; /* Space between image and text */
+}
+
         .product-dropdown {
             margin-top: 10px;
         }
@@ -202,25 +160,25 @@
             padding: 5px;
             margin-bottom: 10px;
         }
-
         /* Button styling */
         .order-now-btn {
-            display: inline-block;
-            background-color: #6b7e09;
-            color: #000000;
-            padding: 10px;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-        }
+    display: inline-block;
+    background-color: #6b7e09;
+    color: #000000;
+    padding: 10px 20px; /* Increased padding for a longer button */
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    font-size: 16px; /* Optional: Adjust font size if needed */
+}
+
         .order-now-btn:hover {
             background-color: #5a6d07;
         }
         #load-more {
             display: block;
-            margin: 20px auto;
             background-color: #6b7e09;
             color: #000000;
             padding: 8px;
@@ -232,11 +190,24 @@
         #load-more:hover {
             background-color: #5a6d07;
         }
-
+        /* Load More Container */
+        .load-more-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px auto;
+            width: 70%; /* Adjust width as needed */
+            max-width: 1000px; /* Optional: limit max width */
+        }
+        .load-more-info {
+            flex: 70%;
+            font-size: smaller;
+            color: #000;
+        }
         /* Tracker and footer styling */
         .tracker {
             background-color: #f8f9fa;
-            padding: 10px;
+            padding: 20px;
             margin-bottom: 20px;
             border-radius: 5px;
             font-weight: 200;
@@ -314,7 +285,6 @@
                         <a href="#product-domain2">Veggies & Fruits</a>
                         <a href="#product-domain3">Grocery & Staples</a>
                         <a href="#product-domain3">Processed & Packed Food</a>
-                        <a href="#product-domain3">Cleaning Essentials</a>
                     </div>
                 </div>
                 <a href="subscription.html">SUBSCRIPTION</a>
@@ -342,7 +312,12 @@
             <div class="product-container" id="product-container">
                 <!-- Products will be dynamically inserted here -->
             </div>
-            <button id="load-more" class="order-now-btn">Load More</button>
+            <div class="load-more-container">
+                <div class="load-more-info">
+                    <span id="visible-products">0</span> / <span id="total-products">0</span> products visible
+                </div>
+                <button id="load-more" class="order-now-btn">Load More</button>
+            </div>
         </div>
     </div>
     
@@ -377,46 +352,66 @@
         let currentPage = 0;
         const itemsPerPage = 6;
         let products = [];
-
+    
         function renderProducts() {
-            const productContainer = document.getElementById('product-container');
-            const startIndex = currentPage * itemsPerPage;
-            const endIndex = Math.min(startIndex + itemsPerPage, products.length);
+    const productContainer = document.getElementById('product-container');
+    const startIndex = currentPage * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, products.length);
+
+    for (let i = startIndex; i < endIndex; i++) {
+        const product = products[i];
+        const productDiv = document.createElement('div');
+        productDiv.classList.add('product');
+        productDiv.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h4><a href="product-detail.html?id=${product.id}">${product.name}</a></h4>
+            <p>Price: ${product.price}</p>
             
-            for (let i = startIndex; i < endIndex; i++) {
-                const product = products[i];
-                const productDiv = document.createElement('div');
-                productDiv.classList.add('product');
-                productDiv.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}">
-                    <h4><a href="product-detail.html?id=${product.id}">${product.name}</a></h4>
-                    <p>Price: ${product.price}</p>
-                    <div class="product-dropdown">
-                        <select>
-                            <option>Weekly</option>
-                            <option>Bi-Weekly</option>
-                            <option>Monthly</option>
-                        </select>
-                    </div>
-                    <a class="order-now-btn">Add</a>
-                `;
-                productContainer.appendChild(productDiv);
+            <a class="order-now-btn" href="product-detail.html?id=${product.id}">View</a>
+        `;
+        productContainer.appendChild(productDiv);
 
-                productDiv.querySelector('.order-now-btn').addEventListener('click', () => {
-                    addToCart(product);
-                });
-            }
+        productDiv.querySelector('.order-now-btn').addEventListener('click', () => {
+            addToCart(product);
+        });
+    }
 
-            if (endIndex >= products.length) {
-                document.getElementById('load-more').style.display = 'none';
-            }
-        }
+    updateProductCount(endIndex);
+    updateLoadMoreButton(endIndex);
+}
 
+    
         function loadMoreProducts() {
             currentPage++;
             renderProducts();
         }
-
+    
+        function showLessProducts() {
+            currentPage = Math.max(0, currentPage - 1);
+            document.getElementById('product-container').innerHTML = '';
+            renderProducts();
+        }
+    
+        function updateProductCount(visibleItems) {
+            document.getElementById('visible-products').textContent = visibleItems;
+            document.getElementById('total-products').textContent = products.length;
+        }
+    
+        function updateLoadMoreButton(visibleItems) {
+            const loadMoreButton = document.getElementById('load-more');
+            const allProductsLoaded = visibleItems >= products.length;
+    
+            if (allProductsLoaded) {
+                loadMoreButton.textContent = 'Show Less';
+                loadMoreButton.removeEventListener('click', loadMoreProducts);
+                loadMoreButton.addEventListener('click', showLessProducts);
+            } else {
+                loadMoreButton.textContent = 'Load More';
+                loadMoreButton.removeEventListener('click', showLessProducts);
+                loadMoreButton.addEventListener('click', loadMoreProducts);
+            }
+        }
+    
         fetch('dairy.json')
             .then(response => response.json())
             .then(data => {
@@ -424,23 +419,19 @@
                 renderProducts();
             })
             .catch(error => console.error('Error fetching products:', error));
-
-        document.getElementById('load-more').addEventListener('click', loadMoreProducts);
-
-        function updateCartCount() {
+    
+            function updateCartCount() {
             const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            document.getElementById('cart-count').textContent = cartItems.length;
+            const cartCountElem = document.getElementById('cart-count');
+            if (cartCountElem) {
+                cartCountElem.textContent = cartItems.length;
+            }
         }
-
-        function addToCart(product) {
-            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            cartItems.push(product);
-            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        
+        document.addEventListener('DOMContentLoaded', () => {
             updateCartCount();
-            alert(`${product.name} has been added to your cart!`);
-        }
-
-        updateCartCount();
+        });
     </script>
+    
 </body>
 </html>
