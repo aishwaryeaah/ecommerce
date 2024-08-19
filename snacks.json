@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "name": "Potato Chips",
+        "image": "./snacks/1.jpg",
+        "price": "$1.99",
+        "description": "Crispy and salty potato chips.",
+        "detailImage": "potato-chips-detail.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Chocolate Bar",
+        "image": "./snacks/2.jpg",
+        "price": "$2.50",
+        "description": "Rich and creamy milk chocolate bar.",
+        "detailImage": "chocolate-bar-detail.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Trail Mix",
+        "image": "./snacks/3.jpg",
+        "price": "$3.75",
+        "description": "Nut and fruit mix for a healthy snack.",
+        "detailImage": "trail-mix-detail.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Pretzels",
+        "image": "./snacks/4.jpg",
+        "price": "$2.25",
+        "description": "Crunchy and salted pretzels.",
+        "detailImage": "pretzels-detail.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Granola Bars",
+        "image": "./snacks/5.jpg",
+        "price": "$3.00",
+        "description": "Chewy granola bars with nuts and honey.",
+        "detailImage": "granola-bars-detail.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Cheese Puffs",
+        "image": "./snacks/6.jpg",
+        "price": "$2.00",
+        "description": "Cheesy and puffy corn snacks.",
+        "detailImage": "cheese-puffs-detail.jpg"
+    },
+    {
+        "id": 7,
+        "name": "Fruit Snacks",
+        "image": "./snacks/7.jpg",
+        "price": "$1.75",
+        "description": "Gummy fruit-flavored snacks.",
+        "detailImage": "fruit-snacks-detail.jpg"
+    },
+    {
+        "id": 8,
+        "name": "Cookies",
+        "image": "./snacks/8.jpg",
+        "price": "$2.99",
+        "description": "Delicious chocolate chip cookies.",
+        "detailImage": "cookies-detail.jpg"
+    }
+]

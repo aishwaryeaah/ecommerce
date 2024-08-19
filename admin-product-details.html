@@ -278,73 +278,126 @@
     <header>
         <div class="navbar">
             <a href="dashboard.html"><div class="logo">PeppyProduce</div></a>
-            <nav class="nav-links">
-                <div class="dropdown">
-                    <a href="#products" class="dropdown-toggle">CATEGORY</a>
-                    <div class="dropdown-content">
-                        <a href="dairy-list.html">Milk & Dairy Products</a>
-                        <a href="#product-domain2">Veggies & Fruits</a>
-                        <a href="#product-domain3">Meat & Poultry</a>
-                    </div>
-                </div>
-                <a href="cart.html">Cart</a>
+            <div class="nav-links">
+                <a href="about.html">About</a>
+                <a href="store.html">Store</a>
+                <a href="contact.html">Contact</a>
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i> <span id="cartCounter">0</span></a>
                 <div class="profile-icon">
                     <i class="fas fa-user"></i>
                     <div class="dropdown-menu">
-                        <a href="#profile">Profile</a>
-                        <a href="#settings">Settings</a>
-                        <a href="#logout">Logout</a>
+                        <a href="profile.html">Profile</a>
+                        <a href="orders.html">Orders</a>
+                        <a href="login.html">Logout</a>
                     </div>
                 </div>
-            </nav>
+            </div>
         </div>
     </header>
     
     <div class="product-container">
-        <img id="product-image" src="path/to/image.jpg" alt="Product Image">
-        <div class="product-info" id="product-info">
-            <h1 id="product-name">Product Name</h1>
-            <input type="text" id="name-input" value="Product Name" style="display: none;">
-            <p>
-                <span id="price-text">Price: $0.00</span>
-                <input type="text" id="price-input" value="0.00" style="display: none;">
-            </p>
-            <p>
-                <span id="description-text">Description: No description available</span>
-                <textarea id="description-input" style="display: none;">No description available</textarea>
-            </p>
-            <div class="subscription-dropdown">
-                <label for="subscription-type">Subscription Type:</label>
-                <select id="subscription-type" onchange="handleSubscriptionChange()">
-                    <option value="Single-Day">Single-Day</option>
-                    <option value="weekly">Weekly</option>
-                    <option value="bi-weekly">Bi-Weekly</option>
-                    <option value="monthly">Monthly</option>
-                    <option value="custom">Custom</option>
-                </select>
-                <div class="subscription-custom-dates" id="custom-dates">
-                    <label for="start-date">Start Date:</label>
-                    <input type="date" id="start-date">
-                    <label for="end-date">End Date:</label>
-                    <input type="date" id="end-date">
-                </div>
+        <img id="productImage" src="" alt="Product Image">
+        <div class="product-info">
+            <h1 id="productName">Product Name</h1>
+            <p id="productPrice">$0.00</p>
+            <p id="productDescription">Product description goes here.</p>
+            
+            <!-- Form in edit mode -->
+            <div id="editForm" class="edit-mode">
+                <input type="text" id="editProductName" name="editProductName">
+                <input type="text" id="editProductPrice" name="editProductPrice">
+                <textarea id="editProductDescription" name="editProductDescription"></textarea>
             </div>
-            <button id="edit-btn" onclick="enableEditing()">Edit</button>
-            <button id="save-btn" onclick="saveChanges()" style="display: none;">Save</button>
+
+            <div class="button-group">
+                <button id="editButton" onclick="toggleEditMode()">Edit</button>
+                <button id="saveButton" onclick="saveProductDetails()">Save</button>
+                <button id="deleteButton" onclick="deleteProduct()">Delete</button>
+            </div>
         </div>
     </div>
 
+    <script>
+        // Function to get query parameter by name
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Fetch and display product details based on ID from URL
+        function loadProductDetails() {
+            const productId = getQueryParam('id'); // Capture product ID from URL
+
+            if (productId) {
+                fetch('dairy.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        const product = data.find(p => p.id == productId); // Fetch the specific product
+
+                        if (product) {
+                            document.getElementById('productImage').src = product.image;
+                            document.getElementById('productName').textContent = product.name;
+                            document.getElementById('productPrice').textContent = `$${product.price}`;
+                            document.getElementById('productDescription').textContent = product.description;
+
+                            // Pre-fill the form with existing product details
+                            document.getElementById('editProductName').value = product.name;
+                            document.getElementById('editProductPrice').value = product.price;
+                            document.getElementById('editProductDescription').value = product.description;
+                        } else {
+                            alert('Product not found');
+                        }
+                    });
+            } else {
+                alert('No product ID provided');
+            }
+        }
+
+        // Call the function to load product details when the page loads
+        window.onload = loadProductDetails;
+
+        // Toggle edit mode
+        function toggleEditMode() {
+            const editForm = document.getElementById('editForm');
+            const saveButton = document.getElementById('saveButton');
+            const editButton = document.getElementById('editButton');
+
+            if (editForm.style.display === 'none' || editForm.style.display === '') {
+                editForm.style.display = 'block';
+                saveButton.style.display = 'inline-block';
+                editButton.textContent = 'Cancel';
+            } else {
+                editForm.style.display = 'none';
+                saveButton.style.display = 'none';
+                editButton.textContent = 'Edit';
+            }
+        }
+
+        // Save product details
+        function saveProductDetails() {
+            const newName = document.getElementById('editProductName').value;
+            const newPrice = document.getElementById('editProductPrice').value;
+            const newDescription = document.getElementById('editProductDescription').value;
+
+            document.getElementById('productName').textContent = newName;
+            document.getElementById('productPrice').textContent = `$${newPrice}`;
+            document.getElementById('productDescription').textContent = newDescription;
+
+            toggleEditMode();
+        }
+
+        // Delete product
+        function deleteProduct() {
+            alert('Product deleted.');
+            // Add your delete logic here
+        }
+    </script>
+
     <footer>
         <div class="footer-upper">
-            <div class="footer-address">
-                <p>123 Peppy Street</p>
-                <p>Peppy City, PC 12345</p>
-                <p>+1 234 567 890</p>
-            </div>
-            <div class="footer-about">
-                <a href="#about-us">About Us</a>
-                <a href="#contact-us">Contact Us</a>
-                <a href="#privacy-policy">Privacy Policy</a>
+            <div>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
             </div>
             <div class="footer-social">
                 <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
@@ -353,70 +406,8 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 PeppyProduce. All rights reserved.</p>
+            &copy; 2023 PeppyProduce. All Rights Reserved.
         </div>
     </footer>
-
-    <script>
-        // Function to enable editing mode
-        function enableEditing() {
-            document.getElementById('product-name').style.display = 'none';
-            document.getElementById('name-input').style.display = 'inline';
-            document.getElementById('price-text').style.display = 'none';
-            document.getElementById('description-text').style.display = 'none';
-            document.getElementById('price-input').style.display = 'inline';
-            document.getElementById('description-input').style.display = 'inline';
-            document.getElementById('edit-btn').style.display = 'none';
-            document.getElementById('save-btn').style.display = 'inline';
-        }
-
-        // Function to save changes
-        function saveChanges() {
-            const newName = document.getElementById('name-input').value;
-            const newPrice = document.getElementById('price-input').value;
-            const newDescription = document.getElementById('description-input').value;
-
-            // Validate the input
-            if (!newName || !newPrice || !newDescription) {
-                alert('Please fill in all fields.');
-                return;
-            }
-
-            // Update the product details
-            document.getElementById('product-name').textContent = newName;
-            document.getElementById('price-text').textContent = `Price: ${newPrice}`;
-            document.getElementById('description-text').textContent = `Description: ${newDescription}`;
-            document.getElementById('product-name').style.display = 'inline';
-            document.getElementById('name-input').style.display = 'none';
-            document.getElementById('price-text').style.display = 'inline';
-            document.getElementById('description-text').style.display = 'inline';
-            document.getElementById('price-input').style.display = 'none';
-            document.getElementById('description-input').style.display = 'none';
-            document.getElementById('edit-btn').style.display = 'inline';
-            document.getElementById('save-btn').style.display = 'none';
-
-            // Save the changes to the data source or localStorage
-            // Assuming localStorage for this example:
-            let productData = JSON.parse(localStorage.getItem('products')) || [];
-            let productIndex = productData.findIndex(p => p.id === parseInt(getQueryParam('id')));
-            if (productIndex !== -1) {
-                productData[productIndex].name = newName;
-                productData[productIndex].price = newPrice;
-                productData[productIndex].description = newDescription;
-                localStorage.setItem('products', JSON.stringify(productData));
-            }
-        }
-
-        // Placeholder function for subscription type change
-        function handleSubscriptionChange() {
-            // Logic to handle subscription type change
-        }
-
-        // Placeholder function to get query parameter
-        function getQueryParam(name) {
-            const params = new URLSearchParams(window.location.search);
-            return params.get(name);
-        }
-    </script>
 </body>
 </html>

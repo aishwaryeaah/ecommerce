@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "name": "Milk",
+        "image": "./grocery/1.jpg",
+        "price": "$3.00",
+        "description": "Fresh whole milk.",
+        "detailImage": "milk-detail.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Bread",
+        "image": "./grocery/2.jpg",
+        "price": "$2.50",
+        "description": "Whole grain bread.",
+        "detailImage": "bread-detail.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Eggs",
+        "image": "./grocery/3.jpg",
+        "price": "$2.00",
+        "description": "Large grade A eggs.",
+        "detailImage": "eggs-detail.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Cheese",
+        "image": "./grocery/4.jpg",
+        "price": "$4.00",
+        "description": "Aged cheddar cheese.",
+        "detailImage": "cheese-detail.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Chicken Breast",
+        "image": "./grocery/5.jpg",
+        "price": "$6.00",
+        "description": "Fresh chicken breast fillets.",
+        "detailImage": "chicken-breast-detail.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Apples",
+        "image": "./grocery/6.jpg",
+        "price": "$3.50",
+        "description": "Crisp and juicy apples.",
+        "detailImage": "apples-detail.jpg"
+    },
+    {
+        "id": 7,
+        "name": "Rice",
+        "image": "./grocery/7.jpg",
+        "price": "$2.75",
+        "description": "Long-grain white rice.",
+        "detailImage": "rice-detail.jpg"
+    },
+    {
+        "id": 8,
+        "name": "Pasta",
+        "image": "./grocery/8.jpg",
+        "price": "$1.75",
+        "description": "Spaghetti pasta.",
+        "detailImage": "pasta-detail.jpg"
+    }
+]

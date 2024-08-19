@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "name": "Apple",
+        "image": "./fruits/1.jpg",
+        "price": "$2.00",
+        "description": "Fresh and juicy apple.",
+        "detailImage": "apple-detail.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Banana",
+        "image": "./fruits/2.jpg",
+        "price": "$1.50",
+        "description": "Sweet and ripe banana.",
+        "detailImage": "banana-detail.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Carrot",
+        "image": "./vegetables/1.jpg",
+        "price": "$1.00",
+        "description": "Crunchy and nutritious carrot.",
+        "detailImage": "carrot-detail.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Broccoli",
+        "image": "./vegetables/2.jpg",
+        "price": "$2.50",
+        "description": "Fresh broccoli with lots of vitamins.",
+        "detailImage": "broccoli-detail.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Orange",
+        "image": "./fruits/3.jpg",
+        "price": "$2.25",
+        "description": "Citrusy and tangy orange.",
+        "detailImage": "orange-detail.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Tomato",
+        "image": "./vegetables/3.jpg",
+        "price": "$1.75",
+        "description": "Ripe and juicy tomato.",
+        "detailImage": "tomato-detail.jpg"
+    },
+    {
+        "id": 7,
+        "name": "Strawberry",
+        "image": "./fruits/4.jpg",
+        "price": "$3.00",
+        "description": "Sweet and juicy strawberries.",
+        "detailImage": "strawberry-detail.jpg"
+    },
+    {
+        "id": 8,
+        "name": "Lettuce",
+        "image": "./vegetables/4.jpg",
+        "price": "$1.25",
+        "description": "Crisp and fresh lettuce.",
+        "detailImage": "lettuce-detail.jpg"
+    }
+]

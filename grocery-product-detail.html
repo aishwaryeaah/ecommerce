@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Cart</title>
+    <title>Product Detail</title>
     <link rel="stylesheet" href="dash-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -121,49 +121,45 @@
             font-size: 24px;
             cursor: pointer;
         }
-        .cart-container {
-            max-width: 800px;
+        .product-container {
+            display: flex;
+            gap: 20px;
             margin: 20px auto;
+            width: 70%;
+            max-width: 1200px;
             padding: 20px;
             border: 1px solid #ddd;
-            border-radius: 10px;
-            background-color: #f9f9f9;
+            border-radius: 5px;
+            background-color: #fff;
         }
-        .cart-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            width: 100%;
-        }
-        .cart-item img {
-            max-width: 100px;
+        .product-container img {
+            width: 40%; /* Set the image width to 40% */
             height: auto;
-            margin-right: 20px;
+            object-fit: cover; /* Ensure the image covers the container */
         }
-        .cart-item h4 {
-            margin: 0;
+        .product-info {
+            width: 60%; /* Set the info container width to 60% */
+            padding: 20px;
         }
-        .cart-item p {
-            margin: 5px 0;
+        .product-info h1 {
+            margin: 0 0 10px 0; /* Add margin below the heading */
         }
-        .cart-item .remove-btn {
-            margin-left: auto;
-            padding: 5px 10px;
-            background-color: #ff4d4d;
-            color: white;
-            border: none;
+        .product-info p {
+            margin: 10px 0; /* Add vertical spacing between paragraphs */
+        }
+        .order-now-btn {
+            display: inline-block;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 10px;
         }
-        .cart-item .remove-btn:hover {
-            background-color: #cc0000;
-        }
-        .empty-cart {
-            text-align: center;
-            font-size: 18px;
-            color: #555;
+        .order-now-btn:hover {
+            background-color: #0056b3;
         }
         .tracker {
             background-color: #f8f9fa;
@@ -173,12 +169,59 @@
             font-weight: 200;
             font-size: small;
         }
+        .added-to-cart {
+            background-color: #28a745;
+        }
+        .added-to-cart:hover {
+            background-color: #218838;
+        }
+        .already-added {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .subscription-dropdown {
+            margin-top: 10px;
+        }
+        .subscription-dropdown label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .subscription-dropdown select,
+        .subscription-dropdown input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .subscription-dropdown input[type="date"] {
+            width: calc(50% - 10px); /* Adjust width for two date inputs side by side */
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .subscription-dropdown input[type="date"]:last-child {
+            margin-right: 0;
+        }
+        .subscription-custom-dates {
+            display: none; /* Hidden by default */
+            margin-top: 10px;
+        }
+        .subscription-custom-dates input[type="date"] {
+            width: calc(50% - 10px); /* Adjust width for two date inputs side by side */
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .subscription-custom-dates input[type="date"]:last-child {
+            margin-right: 0;
+        }
+
         footer {
-            margin-top: auto;
             width: 100%;
             background-color: #000;
             color: #fff;
             font-family: 'Campton', sans-serif;
+            margin-top: 40px;
         }
         .footer-upper {
             display: flex;
@@ -229,46 +272,6 @@
             background-color: #000;
             color: #fff;
         }
-        .checkout-container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background-color: #f9f9f9;
-        }
-        .checkout-container h2 {
-            margin-top: 0;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .checkout-btn {
-            background-color: #6b7e09;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .checkout-btn:hover {
-            background-color: #5a6a07;
-        }
-        #checkout-message {
-            margin-top: 15px;
-            font-size: 16px;
-        }
     </style>
 </head>
 <body>
@@ -301,143 +304,147 @@
         </div>
     </header>
 
-    <main>
-        <div class="cart-container">
-            <h1>Shopping Cart</h1>
-            <div id="cart-container"></div>
-            <div class="checkout-container">
-                <h2>Checkout</h2>
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="address">Address:</label>
-                    <input type="text" id="address" name="address" required>
-                </div>
-                <div class="form-group">
-                    <label for="payment">Payment Method:</label>
-                    <select id="payment" name="payment">
-                        <option value="credit-card">Credit Card</option>
-                        <option value="paypal">PayPal</option>
-                        <option value="bank-transfer">Bank Transfer</option>
-                    </select>
-                </div>
-                <button class="checkout-btn" onclick="checkout()">Checkout</button>
-                <div id="checkout-message"></div>
+    <div class="tracker">
+        <a href="dashboard.html">Home</a> > <a href="grocery-list.html">Grocery & Staples</a> > <span id="product-name">Product Name</span>
+    </div>
+
+    <div class="dashboard-content">
+        <div class="main-section">
+            <div class="product-container" id="product-detail">
+                <!-- Product detail will be dynamically inserted here -->
             </div>
         </div>
-    </main>
-
+    </div>
+    
     <footer>
         <div class="footer-upper">
             <div class="footer-address">
-                <p>Address: 1234 Market Street, Cityville, CA 94103</p>
-                <p>Phone: (123) 456-7890</p>
-                <p>Email: info@peppyproduce.com</p>
+                <h4>Address</h4>
+                <p>1234 Elm St</p>
+                <p>Suite 567</p>
+                <p>Springfield, USA</p>
             </div>
             <div class="footer-about">
-                <a href="#about-us">About Us</a>
-                <a href="#privacy-policy">Privacy Policy</a>
-                <a href="#terms-of-service">Terms of Service</a>
+                <h4>About</h4>
+                <a href="#faq">FAQ</a>
+                <a href="#terms">Terms and Conditions</a>
+                <a href="#privacy">Privacy Policy</a>
             </div>
             <div class="footer-social">
+                <h4>Connect with us</h4>
                 <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
                 <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; 2024 PeppyProduce. All rights reserved.
+            <p>&copy; 2024 404 Brain Not Found. All rights reserved.</p>
         </div>
     </footer>
-
+    
     <script>
-        // Updates cart item count displayed in header
-        function updateCartCount() {
-            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            document.getElementById('cart-count').textContent = cartItems.length;
-        }
-    
-        // Displays cart items from localStorage
-        function displayCartItems() {
-            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            const cartContainer = document.getElementById('cart-container');
-            cartContainer.innerHTML = ''; // Clear the container first
-    
-            if (cartItems.length === 0) {
-                cartContainer.innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
-                return;
-            }
-    
-            cartItems.forEach((item, index) => {
-                const cartItemDiv = createCartItemHTML(item, index);
-                cartContainer.appendChild(cartItemDiv);
-    
-                cartItemDiv.querySelector('.remove-btn').addEventListener('click', () => {
-                    removeCartItem(index);
-                });
-            });
-        }
-    
-        // Creates HTML for a single cart item
-        function createCartItemHTML(item, index) {
-            const cartItemDiv = document.createElement('div');
-            cartItemDiv.classList.add('cart-item');
-            cartItemDiv.innerHTML = `
-                <img src="${item.image}" alt="${item.name}">
-                <div>
-                    <h4>${item.name}</h4>
-                    <p>Price: $${item.price}</p>
-                </div>
-                <button class="remove-btn" data-index="${index}">Remove</button>
-            `;
-            return cartItemDiv;
-        }
-    
-        // Removes an item from the cart
-// Removes an item from the cart
-function removeCartItem(index) {
-    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    cartItems.splice(index, 1);
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    displayCartItems(); // Refresh the cart display
-    updateCartCount(); // Update cart count in the header
+function getQueryParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
 }
 
-        // Handles checkout process
-        // Handles checkout process
-function checkout() {
-    const name = document.getElementById('name').value.trim();
-    const address = document.getElementById('address').value.trim();
-    const paymentMethod = document.getElementById('payment').value;
+function renderProductDetail(product) {
+    console.log('Product:', product); // Log the product object
+    const productDetail = document.getElementById('product-detail');
+    const isInCart = localStorage.getItem(`cart_${product.id}`) !== null;
+    productDetail.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <div class="product-info">
+            <h1>${product.name}</h1>
+            <p>Price: ${product.price}</p>
+            <p>Description: ${product.description}</p>
+            <div class="subscription-dropdown">
+                <label for="subscription-type">Subscription Type:</label>
+                <select id="subscription-type" onchange="handleSubscriptionChange()">
+                    <option value="Single-Day">Single-Day</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="bi-weekly">Bi-Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="custom">Custom</option>
+                </select>
+                <div class="subscription-custom-dates" id="custom-dates">
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" id="start-date">
+                    <label for="end-date">End Date:</label>
+                    <input type="date" id="end-date">
+                </div>
+            </div>
+            <a class="order-now-btn" href="#" onclick="addToCart('${product.id}'); return false;">
+                Add to Cart
+            </a>
+        </div>
+    `;
+    document.getElementById('product-name').textContent = product.name;
+}
 
-    if (name && address) {
-        const checkoutMessage = `
-            Thank you for your purchase, ${name}! Your order will be shipped to ${address}.
-            Payment Method: ${paymentMethod}.
-        `;
-        document.getElementById('checkout-message').textContent = checkoutMessage;
+function handleSubscriptionChange() {
+    const subscriptionType = document.getElementById('subscription-type').value;
+    const customDates = document.getElementById('custom-dates');
 
-        // Clear the cart
-        localStorage.removeItem('cartItems');
-        document.getElementById('cart-container').innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
-        document.getElementById('cart-count').textContent = '0';
+    if (subscriptionType === 'custom') {
+        customDates.style.display = 'block'; // Show date fields
     } else {
-        alert('Please fill in all required fields.');
+        customDates.style.display = 'none'; // Hide date fields
     }
 }
 
-    
-        // Initializes the cart display and updates cart count on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            displayCartItems();
-            updateCartCount();
-        });
+function addToCart(productId) {
+    const cartCountElem = document.getElementById('cart-count');
+    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+    if (cartItems.includes(productId)) {
+        alert('This product is already in your cart.');
+        return;
+    }
+
+    cartItems.push(productId);
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    updateCartCount(); // Update the cart count on this page
+    const orderNowBtn = document.querySelector('.order-now-btn');
+    orderNowBtn.classList.add('added-to-cart');
+    orderNowBtn.textContent = 'Already Added';
+
+    // Revert button text after 3 seconds
+    setTimeout(() => {
+        orderNowBtn.classList.remove('added-to-cart');
+        orderNowBtn.textContent = 'Add to Cart';
+    }, 3000);
+}
+
+fetch('grocery.json')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Log the data to check its structure
+        const productId = getQueryParam('id');
+        if (!productId) {
+            document.getElementById('product-detail').innerHTML = 'Product ID not provided.';
+            return;
+        }
+
+        const product = data.find(p => p.id === parseInt(productId));
+        if (product) {
+            renderProductDetail(product);
+        } else {
+            document.getElementById('product-detail').innerHTML = 'Product not found.';
+        }
+    })
+    .catch(error => console.error('Error fetching product details:', error));
+
+function updateCartCount() {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const cartCountElem = document.getElementById('cart-count');
+    cartCountElem.textContent = cartItems.length;
+}
+
+// Initialize cart count on page load
+updateCartCount();
+
     </script>
     
 </body>
