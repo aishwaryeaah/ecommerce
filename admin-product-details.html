@@ -163,7 +163,7 @@
         }
         .tracker {
             background-color: #f8f9fa;
-            padding: 10px;
+            padding: 20px;
             margin-bottom: 20px;
             border-radius: 5px;
             font-weight: 200;
@@ -284,81 +284,35 @@
                     <div class="dropdown-content">
                         <a href="dairy-list.html">Milk & Dairy Products</a>
                         <a href="#product-domain2">Veggies & Fruits</a>
-                        <a href="#product-domain3">Grocery & Staples</a>
-                        <a href="#product-domain3">Processed & Packed Food</a>
+                        <a href="#product-domain3">Meat & Poultry</a>
                     </div>
                 </div>
-                <a href="subscription.html">SUBSCRIPTION</a>
-                <a href="cart.html" class="cart-counter">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span id="cart-count">0</span>
-                </a>
+                <a href="cart.html">Cart</a>
                 <div class="profile-icon">
-                    <i class="fas fa-user-circle"></i>
+                    <i class="fas fa-user"></i>
                     <div class="dropdown-menu">
-                        <a href="#view-profile">View Profile</a>
-                        <a href="index.html">Logout</a>
+                        <a href="#profile">Profile</a>
+                        <a href="#settings">Settings</a>
+                        <a href="#logout">Logout</a>
                     </div>
                 </div>
             </nav>
         </div>
     </header>
-
-    <div class="tracker">
-        <a href="dashboard.html">Home</a> > <a href="dairy-list.html">Dairy Products</a> > <span id="product-name">Product Name</span>
-    </div>
-
-    <div class="dashboard-content">
-        <div class="main-section">
-            <div class="product-container" id="product-detail">
-                <!-- Product detail will be dynamically inserted here -->
-            </div>
-        </div>
-    </div>
     
-    <footer>
-        <div class="footer-upper">
-            <div class="footer-address">
-                <h4>Address</h4>
-                <p>1234 Elm St</p>
-                <p>Suite 567</p>
-                <p>Springfield, USA</p>
-            </div>
-            <div class="footer-about">
-                <h4>About</h4>
-                <a href="#faq">FAQ</a>
-                <a href="#terms">Terms and Conditions</a>
-                <a href="#privacy">Privacy Policy</a>
-            </div>
-            <div class="footer-social">
-                <h4>Connect with us</h4>
-                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 404 Brain Not Found. All rights reserved.</p>
-        </div>
-    </footer>
-    
-    <script>
-function getQueryParam(name) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name);
-}
-
-function renderProductDetail(product) {
-    console.log('Product:', product); // Log the product object
-    const productDetail = document.getElementById('product-detail');
-    const isInCart = localStorage.getItem(`cart_${product.id}`) !== null;
-    productDetail.innerHTML = `
-        <img src="${product.image}" alt="${product.name}">
-        <div class="product-info">
-            <h1 contenteditable="true" id="product-name-edit">${product.name}</h1>
-            <p>Price: <span contenteditable="true" id="product-price-edit">${product.price}</span></p>
-            <p>Description: <span contenteditable="true" id="product-description-edit">${product.description}</span></p>
+    <div class="product-container">
+        <img id="product-image" src="path/to/image.jpg" alt="Product Image">
+        <div class="product-info" id="product-info">
+            <h1 id="product-name">Product Name</h1>
+            <input type="text" id="name-input" value="Product Name" style="display: none;">
+            <p>
+                <span id="price-text">Price: $0.00</span>
+                <input type="text" id="price-input" value="0.00" style="display: none;">
+            </p>
+            <p>
+                <span id="description-text">Description: No description available</span>
+                <textarea id="description-input" style="display: none;">No description available</textarea>
+            </p>
             <div class="subscription-dropdown">
                 <label for="subscription-type">Subscription Type:</label>
                 <select id="subscription-type" onchange="handleSubscriptionChange()">
@@ -375,107 +329,94 @@ function renderProductDetail(product) {
                     <input type="date" id="end-date">
                 </div>
             </div>
-            <a class="order-now-btn" href="#" onclick="addToCart('${product.id}'); return false;">
-                ${isInCart ? 'Already Added' : 'Add to Cart'}
-            </a>
-            <button onclick="saveProductDetails('${product.id}')">Save Changes</button>
-            <button onclick="cancelEdit()">Cancel</button>
+            <button id="edit-btn" onclick="enableEditing()">Edit</button>
+            <button id="save-btn" onclick="saveChanges()" style="display: none;">Save</button>
         </div>
-    `;
-    document.getElementById('product-name').textContent = product.name;
-}
+    </div>
 
-function handleSubscriptionChange() {
-    const subscriptionType = document.getElementById('subscription-type').value;
-    const customDates = document.getElementById('custom-dates');
+    <footer>
+        <div class="footer-upper">
+            <div class="footer-address">
+                <p>123 Peppy Street</p>
+                <p>Peppy City, PC 12345</p>
+                <p>+1 234 567 890</p>
+            </div>
+            <div class="footer-about">
+                <a href="#about-us">About Us</a>
+                <a href="#contact-us">Contact Us</a>
+                <a href="#privacy-policy">Privacy Policy</a>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 PeppyProduce. All rights reserved.</p>
+        </div>
+    </footer>
 
-    if (subscriptionType === 'custom') {
-        customDates.style.display = 'block'; // Show date fields
-    } else {
-        customDates.style.display = 'none'; // Hide date fields
-    }
-}
-
-function addToCart(productId) {
-    const cartCountElem = document.getElementById('cart-count');
-    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-
-    if (cartItems.includes(productId)) {
-        alert('This product is already in your cart.');
-        return;
-    }
-
-    cartItems.push(productId);
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    updateCartCount(); // Update the cart count on this page
-    const orderNowBtn = document.querySelector('.order-now-btn');
-    orderNowBtn.classList.add('added-to-cart');
-    orderNowBtn.textContent = 'Already Added';
-
-    // Revert button text after 3 seconds
-    setTimeout(() => {
-        orderNowBtn.classList.remove('added-to-cart');
-        orderNowBtn.textContent = 'Add to Cart';
-    }, 3000);
-}
-
-function saveProductDetails(productId) {
-    const productName = document.getElementById('product-name-edit').textContent;
-    const productPrice = document.getElementById('product-price-edit').textContent;
-    const productDescription = document.getElementById('product-description-edit').textContent;
-
-    // For demonstration purposes, we'll just log the updated values
-    console.log(`Saving details for product ${productId}:`);
-    console.log(`Name: ${productName}`);
-    console.log(`Price: ${productPrice}`);
-    console.log(`Description: ${productDescription}`);
-    
-    // Here you would typically send the updated details to the server
-    // For example:
-    // fetch('/update-product', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ id: productId, name: productName, price: productPrice, description: productDescription })
-    // })
-    // .then(response => response.json())
-    // .then(data => console.log('Update success:', data))
-    // .catch(error => console.error('Error updating product:', error));
-}
-
-function cancelEdit() {
-    // Reload the page or redirect to revert changes
-    location.reload();
-}
-
-fetch('dairy.json')
-    .then(response => response.json())
-    .then(data => {
-        console.log(data); // Log the data to check its structure
-        const productId = getQueryParam('id');
-        if (!productId) {
-            document.getElementById('product-detail').innerHTML = 'Product ID not provided.';
-            return;
+    <script>
+        // Function to enable editing mode
+        function enableEditing() {
+            document.getElementById('product-name').style.display = 'none';
+            document.getElementById('name-input').style.display = 'inline';
+            document.getElementById('price-text').style.display = 'none';
+            document.getElementById('description-text').style.display = 'none';
+            document.getElementById('price-input').style.display = 'inline';
+            document.getElementById('description-input').style.display = 'inline';
+            document.getElementById('edit-btn').style.display = 'none';
+            document.getElementById('save-btn').style.display = 'inline';
         }
 
-        const product = data.find(p => p.id === parseInt(productId));
-        if (product) {
-            renderProductDetail(product);
-        } else {
-            document.getElementById('product-detail').innerHTML = 'Product not found.';
+        // Function to save changes
+        function saveChanges() {
+            const newName = document.getElementById('name-input').value;
+            const newPrice = document.getElementById('price-input').value;
+            const newDescription = document.getElementById('description-input').value;
+
+            // Validate the input
+            if (!newName || !newPrice || !newDescription) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            // Update the product details
+            document.getElementById('product-name').textContent = newName;
+            document.getElementById('price-text').textContent = `Price: ${newPrice}`;
+            document.getElementById('description-text').textContent = `Description: ${newDescription}`;
+            document.getElementById('product-name').style.display = 'inline';
+            document.getElementById('name-input').style.display = 'none';
+            document.getElementById('price-text').style.display = 'inline';
+            document.getElementById('description-text').style.display = 'inline';
+            document.getElementById('price-input').style.display = 'none';
+            document.getElementById('description-input').style.display = 'none';
+            document.getElementById('edit-btn').style.display = 'inline';
+            document.getElementById('save-btn').style.display = 'none';
+
+            // Save the changes to the data source or localStorage
+            // Assuming localStorage for this example:
+            let productData = JSON.parse(localStorage.getItem('products')) || [];
+            let productIndex = productData.findIndex(p => p.id === parseInt(getQueryParam('id')));
+            if (productIndex !== -1) {
+                productData[productIndex].name = newName;
+                productData[productIndex].price = newPrice;
+                productData[productIndex].description = newDescription;
+                localStorage.setItem('products', JSON.stringify(productData));
+            }
         }
-    })
-    .catch(error => console.error('Error fetching product details:', error));
 
-function updateCartCount() {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    const cartCountElem = document.getElementById('cart-count');
-    cartCountElem.textContent = cartItems.length;
-}
+        // Placeholder function for subscription type change
+        function handleSubscriptionChange() {
+            // Logic to handle subscription type change
+        }
 
-// Initialize cart count on page load
-updateCartCount();
-
+        // Placeholder function to get query parameter
+        function getQueryParam(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
     </script>
-    
 </body>
 </html>
