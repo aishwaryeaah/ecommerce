@@ -357,40 +357,49 @@
     </footer>
 
     <script>
+        // Updates cart item count displayed in header
         function updateCartCount() {
             const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
             document.getElementById('cart-count').textContent = cartItems.length;
         }
-
+    
+        // Displays cart items from localStorage
         function displayCartItems() {
             const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
             const cartContainer = document.getElementById('cart-container');
             cartContainer.innerHTML = ''; // Clear the container first
-
+    
             if (cartItems.length === 0) {
                 cartContainer.innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
                 return;
             }
-
+    
             cartItems.forEach((item, index) => {
-                const cartItemDiv = document.createElement('div');
-                cartItemDiv.classList.add('cart-item');
-                cartItemDiv.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}">
-                    <div>
-                        <h4>${item.name}</h4>
-                        <p>Price: ${item.price}</p>
-                    </div>
-                    <button class="remove-btn" data-index="${index}">Remove</button>
-                `;
+                const cartItemDiv = createCartItemHTML(item, index);
                 cartContainer.appendChild(cartItemDiv);
-
+    
                 cartItemDiv.querySelector('.remove-btn').addEventListener('click', () => {
                     removeCartItem(index);
                 });
             });
         }
-
+    
+        // Creates HTML for a single cart item
+        function createCartItemHTML(item, index) {
+            const cartItemDiv = document.createElement('div');
+            cartItemDiv.classList.add('cart-item');
+            cartItemDiv.innerHTML = `
+                <img src="${item.image}" alt="${item.name}">
+                <div>
+                    <h4>${item.name}</h4>
+                    <p>Price: $${item.price}</p>
+                </div>
+                <button class="remove-btn" data-index="${index}">Remove</button>
+            `;
+            return cartItemDiv;
+        }
+    
+        // Removes an item from the cart
         function removeCartItem(index) {
             let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
             cartItems.splice(index, 1);
@@ -398,30 +407,31 @@
             displayCartItems();
             updateCartCount();
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            displayCartItems();
-            updateCartCount();
-        });
-
-        document.getElementById('checkout-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent form submission
-
-            // Simulate a successful checkout
+    
+        // Handles checkout process
+        function checkout() {
             const name = document.getElementById('name').value;
             const address = document.getElementById('address').value;
-            const paymentMethod = document.getElementById('payment-method').value;
-
-            document.getElementById('checkout-message').textContent = `
+            const paymentMethod = document.getElementById('payment').value;
+    
+            const checkoutMessage = `
                 Thank you for your purchase, ${name}! Your order will be shipped to ${address}.
                 Payment Method: ${paymentMethod}.
             `;
-
+            document.getElementById('checkout-message').textContent = checkoutMessage;
+    
             // Clear the cart
             localStorage.removeItem('cartItems');
             document.getElementById('cart-container').innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
             document.getElementById('cart-count').textContent = '0';
+        }
+    
+        // Initializes the cart display and updates cart count on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            displayCartItems();
+            updateCartCount();
         });
     </script>
+    
 </body>
 </html>

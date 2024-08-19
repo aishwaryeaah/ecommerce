@@ -364,10 +364,10 @@
         productDiv.classList.add('product');
         productDiv.innerHTML = `
             <img src="${product.image}" alt="${product.name}">
-            <h4><a href="product-detail.html?id=${product.id}">${product.name}</a></h4>
+            <h4><a href="admin-product-detail.html?id=${product.id}">${product.name}</a></h4>
             <p>Price: ${product.price}</p>
             
-            <a class="order-now-btn" href="product-detail.html?id=${product.id}">View</a>
+            <a class="order-now-btn" href="admin-product-detail.html?id=${product.id}">View</a>
         `;
         productContainer.appendChild(productDiv);
 

@@ -354,11 +354,11 @@ function renderProductDetail(product) {
     const productDetail = document.getElementById('product-detail');
     const isInCart = localStorage.getItem(`cart_${product.id}`) !== null;
     productDetail.innerHTML = `
-        <img src="${product.detailImage}" alt="${product.name}">
+        <img src="${product.image}" alt="${product.name}">
         <div class="product-info">
-            <h1>${product.name}</h1>
-            <p>Price: ${product.price}</p>
-            <p>Description: ${product.description}</p>
+            <h1 contenteditable="true" id="product-name-edit">${product.name}</h1>
+            <p>Price: <span contenteditable="true" id="product-price-edit">${product.price}</span></p>
+            <p>Description: <span contenteditable="true" id="product-description-edit">${product.description}</span></p>
             <div class="subscription-dropdown">
                 <label for="subscription-type">Subscription Type:</label>
                 <select id="subscription-type" onchange="handleSubscriptionChange()">
@@ -376,8 +376,10 @@ function renderProductDetail(product) {
                 </div>
             </div>
             <a class="order-now-btn" href="#" onclick="addToCart('${product.id}'); return false;">
-                Add to Cart
+                ${isInCart ? 'Already Added' : 'Add to Cart'}
             </a>
+            <button onclick="saveProductDetails('${product.id}')">Save Changes</button>
+            <button onclick="cancelEdit()">Cancel</button>
         </div>
     `;
     document.getElementById('product-name').textContent = product.name;
@@ -415,6 +417,34 @@ function addToCart(productId) {
         orderNowBtn.classList.remove('added-to-cart');
         orderNowBtn.textContent = 'Add to Cart';
     }, 3000);
+}
+
+function saveProductDetails(productId) {
+    const productName = document.getElementById('product-name-edit').textContent;
+    const productPrice = document.getElementById('product-price-edit').textContent;
+    const productDescription = document.getElementById('product-description-edit').textContent;
+
+    // For demonstration purposes, we'll just log the updated values
+    console.log(`Saving details for product ${productId}:`);
+    console.log(`Name: ${productName}`);
+    console.log(`Price: ${productPrice}`);
+    console.log(`Description: ${productDescription}`);
+    
+    // Here you would typically send the updated details to the server
+    // For example:
+    // fetch('/update-product', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ id: productId, name: productName, price: productPrice, description: productDescription })
+    // })
+    // .then(response => response.json())
+    // .then(data => console.log('Update success:', data))
+    // .catch(error => console.error('Error updating product:', error));
+}
+
+function cancelEdit() {
+    // Reload the page or redirect to revert changes
+    location.reload();
 }
 
 fetch('dairy.json')
